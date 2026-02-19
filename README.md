@@ -2,10 +2,16 @@
 
 Genera animaciones suaves de transición entre dos imágenes con alineación facial.
 
+## Requisitos
+
+- Python 3.10 o superior
+
 ## Instalación
 
 ```bash
-pip install opencv-python numpy Pillow imageio imageio-ffmpeg gradio
+git clone https://github.com/aflazo/smooth-transition.git
+cd smooth-transition
+pip install -r requirements.txt
 ```
 
 ## UI Web (Gradio)
