@@ -1,34 +1,36 @@
-# smooth_transition
+# Smooth Transition
 
-CLI que genera una animación suave de transición (cross-fade con easing) entre dos imágenes.
+Genera animaciones suaves de transición entre dos imágenes con alineación facial.
 
 ## Instalación
 
 ```bash
-pip install opencv-python numpy Pillow imageio imageio-ffmpeg
+pip install opencv-python numpy Pillow imageio imageio-ffmpeg gradio
 ```
 
-## Uso
-
-### GIF básico
+## UI Web (Gradio)
 
 ```bash
-python main.py --x X.png --y Y.png --out morph.gif
+python app.py
 ```
 
-### MP4 con parámetros personalizados
+Abre `http://127.0.0.1:7860` en el navegador.
+
+### Flujo:
+1. **Sube las imágenes** X (origen) e Y (destino).
+2. **Marca 3 puntos** en cada imagen: ojo izquierdo, ojo derecho y boca. Selecciona el punto activo con el radio button y haz click en la imagen para posicionarlo.
+3. **Configura** duración, FPS, tamaño, easing, formato (GIF/MP4), hold y reverse.
+4. **Genera** la animación. El sistema aplica una transformación afín para alinear ambas caras antes de hacer la transición.
+
+## CLI
 
 ```bash
-python main.py --x X.png --y Y.png --out morph.mp4 --fps 30 --seconds 3
+python main.py --x A.png --y B.png --out morph.gif
+python main.py --x A.png --y B.png --out morph.mp4 --fps 30 --seconds 3
+python main.py --x A.png --y B.png --out loop.gif --reverse
 ```
 
-### GIF en loop (X → Y → X)
-
-```bash
-python main.py --x X.png --y Y.png --out loop.gif --reverse
-```
-
-### Todas las opciones
+### Opciones
 
 ```
 --x           Imagen de origen (requerido)
@@ -36,14 +38,13 @@ python main.py --x X.png --y Y.png --out loop.gif --reverse
 --out         Archivo de salida: .gif o .mp4 (requerido)
 --fps         Frames por segundo (default: 24)
 --seconds     Duración de la transición (default: 2.5)
---size        Tamaño cuadrado en px — crop centrado + resize (default: 512)
+--size        Tamaño cuadrado en px (default: 512)
 --easing      Función de easing (default: smoothstep)
-              Opciones: linear, smoothstep, smootherstep, ease-in, ease-out, ease-in-out
 --hold        Pausa en primer/último frame en segundos (default: 0.3)
---reverse     Generar animación X→Y→X (útil para GIF en loop)
+--reverse     Generar animación X→Y→X
 ```
 
-## Ejemplos de easing
+## Easings disponibles
 
 | Easing        | Descripción                          |
 |---------------|--------------------------------------|
